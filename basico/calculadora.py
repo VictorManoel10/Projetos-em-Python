@@ -5,5 +5,18 @@ result = 0
 
 while True:
     num1 = float(input("Digite o primeiro número: "))
-    op = int(input("Qual será a operação: "))
+    op = input("Qual será a operação: ")
     num2 = float(input("Digite o segundo número: "))
+
+    if op == "+":
+        result = num1 + num2
+    elif op == "-":
+        result = num1 - num2
+    elif op == "/":
+        result = num1 / num2
+    elif op == "*":
+        result = num1 * num2
+    else:
+        print("Operação desconhecida!")
+
+    print(f"{num1} {op} {num2} = {result}")
