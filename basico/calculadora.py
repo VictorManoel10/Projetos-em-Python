@@ -1,47 +1,50 @@
-while True:
-    # Pede para o usuário digitar o primeiro número ou 'sair' para encerrar o programa
-    entrada = input("Digite o primeiro número (ou 'sair' para encerrar): ")
-    # Verifica se o usuário quer sair (digitou 'sair' ou 'q', sem diferenciar maiúsculas/minúsculas)
-    if entrada.lower() in ['sair', 'q']:
-        print("Encerrando a calculadora. Até mais!")
-        break  # Sai do loop infinito e encerra o programa
-    # Tenta converter a entrada para número decimal (float)
-    try:
-        num1 = float(entrada)
-    except ValueError:
-        # Se der erro na conversão, avisa e volta para o início do loop para tentar novamente
-        print("Valor inválido! Tente novamente.")
-        continue
-    # Pede para o usuário digitar a operação matemática desejada
-    op = input("Qual será a operação (+, -, *, /, %): ")
-    # Verifica se a operação é válida; se não for, avisa e reinicia o loop
-    if op not in ['+', '-', '*', '/', '%']:
-        print("Operação inválida!")
-        continue 
-    # Pede para o usuário digitar o segundo número
-    entrada = input("Digite o segundo número: ")    
-    # Tenta converter a entrada para float, caso contrário reinicia o loop
-    try:
-        num2 = float(entrada)
-    except ValueError:
-        print("Valor inválido! Tente novamente.")
-        continue    
-    # Executa a operação escolhida
-    if op == "+":
-        result = num1 + num2
-    elif op == "-":
-        result = num1 - num2
-    elif op == "/":
+def obter_numero(mensagem):
+    while True:
+        entrada = input(mensagem)
+        if entrada.lower() in ['sair', 'q']:
+            return 'sair'  
         try:
-            # Tenta fazer a divisão, tratando o caso de divisão por zero
-            result = num1 / num2
-        except ZeroDivisionError:
-            print("ERRO: Divisão por zero!")
-            continue  # Volta para o início do loop sem imprimir resultado
+            return float(entrada)
+        except ValueError:
+            print("Valor inválido! Tente novamente.")
+        
+def obter_operacao():
+    operacoes_validas = ['+', '-', '*', '/', '%']
+    while True:
+        op = input("Qual será a operação (+, -, *, /, %): ")
+        if op in operacoes_validas:
+            return op
+        print("Operação inválida!")
+
+def calcular(num1, op, num2):  
+    if op == "+":
+        return num1 + num2
+    elif op == "-":
+        return num1 - num2
+    elif op == "/":
+        if num2 == 0:
+            return("ERRO: Divisão por zero!")   
     elif op == "*":
-        result = num1 * num2
+        return num1 * num2
     elif op == "%":
-        result = (num1 * num2) / 100
-    # Mostra o resultado da operação para o usuário
-    print(f"{num1} {op} {num2} = {result}\n")
+        return (num1 * num2) / 100
+
+def main():
+    while True:
+        num1 = obter_numero("Digite o primeiro número(ou 'sair' para encerrar): ")
+        if num1 == 'sair':
+            print("Encerrando a calculadora. Até mais!")
+            break
+
+        op = obter_operacao()
+
+        num2 = obter_numero("Digite o segundo número: ")
+        if num2 == 'sair':
+            print("Encerrando a calculadora. Até mais!")
+            break
+
+        resultado = calcular(num1,op,num2)
+        print(f"{num1} {op} {num2} = {resultado}\n")
+    
+main()
 
