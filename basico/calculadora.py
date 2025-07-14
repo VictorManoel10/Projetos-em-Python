@@ -13,9 +13,9 @@ while True:
         print("Valor inválido! Tente novamente.")
         continue
     # Pede para o usuário digitar a operação matemática desejada
-    op = input("Qual será a operação (+, -, *, /, **): ")
+    op = input("Qual será a operação (+, -, *, /, %): ")
     # Verifica se a operação é válida; se não for, avisa e reinicia o loop
-    if op not in ['+', '-', '*', '/', '**']:
+    if op not in ['+', '-', '*', '/', '%']:
         print("Operação inválida!")
         continue 
     # Pede para o usuário digitar o segundo número
@@ -40,8 +40,8 @@ while True:
             continue  # Volta para o início do loop sem imprimir resultado
     elif op == "*":
         result = num1 * num2
-    elif op == "**":
-        result = num1 ** num2
+    elif op == "%":
+        result = (num1 * num2) / 100
     # Mostra o resultado da operação para o usuário
     print(f"{num1} {op} {num2} = {result}\n")
 
