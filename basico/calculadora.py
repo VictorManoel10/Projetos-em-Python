@@ -13,7 +13,12 @@ while True:
     elif op == "-":
         result = num1 - num2
     elif op == "/":
-        result = num1 / num2
+        
+        try:
+            result = num1 / num2
+        except ZeroDivisionError:
+            print("ERRO: Divisão por zero!")
+            continue
     elif op == "*":
         result = num1 * num2
     else:
