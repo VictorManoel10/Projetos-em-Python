@@ -1,9 +1,11 @@
 # Função para ler um número (ou comando de saída)
-def obter_numero(mensagem):
+def obter_numero(mensagem, resultado_anterior):
     while True:
         entrada = input(mensagem)
         if entrada.lower() in ['sair', 'q']:  # Permite encerrar o programa
-            return 'sair'  
+            return 'sair'
+        if entrada.lower() == 'ans':
+            return resultado_anterior  
         try:
             return float(entrada)  # Converte entrada para número
         except ValueError:
@@ -35,21 +37,26 @@ def calcular(num1, op, num2):
 
 # Função principal que controla o fluxo da calculadora
 def main():
+    resultado_anterior = 0
     while True:
-        num1 = obter_numero("Digite o primeiro número (ou 'sair' para encerrar): ")
+        print(f"[ans = {resultado_anterior}]")  # Mostra o valor atual de ans
+        num1 = obter_numero("Digite o primeiro número (ou'ans',  'sair' para encerrar): ", resultado_anterior)
         if num1 == 'sair':
             print("Encerrando a calculadora. Até mais!")
             break
 
         op = obter_operacao()
 
-        num2 = obter_numero("Digite o segundo número: ")
+        num2 = obter_numero("Digite o segundo número(ou 'ans'): ", resultado_anterior)
         if num2 == 'sair':
             print("Encerrando a calculadora. Até mais!")
             break
 
         resultado = calcular(num1, op, num2)
         print(f"{num1} {op} {num2} = {resultado}\n")  # Exibe o resultado
+
+        if isinstance(resultado, (int,float)):
+            resultado_anterior = resultado
 
 # Inicia a execução do programa
 main()
