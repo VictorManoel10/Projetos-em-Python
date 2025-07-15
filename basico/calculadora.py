@@ -49,7 +49,7 @@ def main():
     resultado_anterior = 0
     while True:
         exibir_interface(resultado_anterior)
-        num1 = obter_numero("Digite o primeiro número (ou'ans',  'sair' para encerrar): ", resultado_anterior)
+        num1 = obter_numero("Digite o primeiro número (ou 'ans',  'sair' para encerrar): ", resultado_anterior)
         if num1 == 'sair':
             print(Fore.GREEN + "Encerrando a calculadora. Até mais!" + Style.RESET_ALL)
             break
